@@ -7,6 +7,7 @@ class CardSchema extends Model {
   public category!: Category;
   public question!: string;
   public answer!: string;
+  public tag!: string;
 }
 
 CardSchema.init({
@@ -55,6 +56,18 @@ CardSchema.init({
       },
     },
   },
+  tag: {
+    type: DataTypes.STRING(255),
+    allowNull: false,
+    validate: {
+      notEmpty: {
+        msg: "Tag cannot be empty",
+      },
+      notNull: {
+        msg: "Tag cannot be null",
+      },
+    },
+  }
 },{
   sequelize,
   tableName: "cards",

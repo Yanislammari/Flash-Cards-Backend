@@ -5,6 +5,7 @@ interface Card {
   category: Category;
   question: string;
   answer: string;
+  tag: string;
 }
 
 export default Card;

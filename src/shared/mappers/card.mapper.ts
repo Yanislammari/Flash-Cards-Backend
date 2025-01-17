@@ -8,6 +8,7 @@ const CardMapper = {
       category: cardSchema.category,
       question: cardSchema.question,
       answer: cardSchema.answer,
+      tag: cardSchema.tag
     };
   },
 
