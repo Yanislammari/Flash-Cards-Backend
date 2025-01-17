@@ -9,7 +9,7 @@ const databasePassword = process.env.DATABASE_PASSWORD as string;
 const databaseIpAdress = process.env.DATABASE_IP_ADRESS as string;
 const databasePort = parseInt(process.env.DATABASE_PORT as string, 10);
 
-const sequelize = new Sequelize(databaseName, databaseUsername, databasePassword, {
+export const sequelize = new Sequelize(databaseName, databaseUsername, databasePassword, {
   host: databaseIpAdress,
   port: databasePort,
   dialect: "mysql",
@@ -35,5 +35,3 @@ export const startDatabase = async () => {
     throw Error("Failed to connect to Database");
   }
 };
-
-export default sequelize;
