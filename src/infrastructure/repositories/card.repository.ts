@@ -17,6 +17,16 @@ class CardRepository {
       throw new Error("Error fetching cards");
     }
   }
+
+  public static async addCard(cardData: Partial<CardSchema>): Promise<CardSchema> {
+    try {
+      const newCard = await CardSchema.create(cardData);
+      return newCard;
+    }
+    catch(err) {
+      throw new Error("Error adding card");
+    }
+  }
 }
 
 export default CardRepository;
