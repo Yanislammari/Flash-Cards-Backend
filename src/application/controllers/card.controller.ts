@@ -6,11 +6,15 @@ import { getAllCardsService, addCardService } from "../services/card.service";
 export async function getAllCards(req: Request, res: Response) {
   try {
     const tagsQuery = req.query.tags;
-    let tags: string[];
+    let tags: string[] | undefined;
     
     switch(typeof tagsQuery) {
       case "string": {
         tags = tagsQuery.split(",").map(tag => tag.trim());
+        break;
+      }
+      case "undefined": {
+        tags = undefined;
         break;
       }
       default: {
