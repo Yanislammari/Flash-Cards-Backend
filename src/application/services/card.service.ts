@@ -1,5 +1,6 @@
 import Card from "../../domain/entities/card.entity";
 import CardRepository from "../../infrastructure/repositories/card.repository";
+import CardSchema from "../../infrastructure/schemas/card.schema";
 import CardMapper from "../../shared/mappers/card.mapper";
 
 export async function getAllCardsService(tags?: string[]): Promise<Card[]> {
@@ -13,4 +14,14 @@ export async function getAllCardsService(tags?: string[]): Promise<Card[]> {
   }
 }
 
-// ajouter add card
+export async function addCardService(card: Card): Promise<Card> {
+  try {
+    const cardSchema: CardSchema = await CardMapper.toSchema(card);
+    const newCardSchema: CardSchema = await CardRepository.addCard(cardSchema);
+    const newCard: Card = CardMapper.toDomain(newCardSchema);
+    return newCard;
+  }
+  catch(err) {
+    throw Error("Error adding card");
+  }
+}
