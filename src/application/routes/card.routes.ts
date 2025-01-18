@@ -1,8 +1,9 @@
 import express from "express";
-import { getAllCards } from "../controllers/card.controller";
+import { getAllCards, addCard } from "../controllers/card.controller";
 
 const router = express.Router();
 
 router.get("/", getAllCards);
+router.post("/", addCard);
 
 export default router;

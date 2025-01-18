@@ -20,7 +20,7 @@ class CardRepository {
 
   public static async addCard(cardData: Partial<CardSchema>): Promise<CardSchema> {
     try {
-      const newCard = await CardSchema.create(cardData);
+      const newCard = await CardSchema.create(cardData.dataValues);
       return newCard;
     }
     catch(err) {
