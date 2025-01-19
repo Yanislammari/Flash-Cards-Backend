@@ -1,5 +1,6 @@
 import Card from "../../domain/entities/card.entity";
 import CardSchema from "../../infrastructure/schemas/card.schema";
+import CardMapper from "../../shared/mappers/card.mapper";
 import CardRepository from "../../infrastructure/repositories/card.repository";
 import getDaysForCategory from "../../shared/utils/category-days";
 import { calculateDaysBetween } from "../../shared/utils/date";
@@ -14,7 +15,7 @@ export async function getCardsForTodayService(todayDate: Date): Promise<Card[]> 
   try {
     const cards = await CardRepository.getAllCards();
     const cardsToday = cards.filter((card) => isCardForToday(card, todayDate));
-    return cardsToday;
+    return CardMapper.toDomainList(cardsToday);
   }
   catch(err) {
     throw Error("Error fetching today cards");
