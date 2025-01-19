@@ -10,8 +10,13 @@ function isCardForToday(card: CardSchema, todayDate: Date): boolean {
   return daysSinceUpdate === getDaysForCategory(card.category);
 }
 
-export async function getCardsForToday(todayDate: Date): Promise<Card[]> {
-  const cards = await CardRepository.getAllCards();
-  const cardsToday = cards.filter((card) => isCardForToday(card, todayDate));
-  return cardsToday;
+export async function getCardsForTodayService(todayDate: Date): Promise<Card[]> {
+  try {
+    const cards = await CardRepository.getAllCards();
+    const cardsToday = cards.filter((card) => isCardForToday(card, todayDate));
+    return cardsToday;
+  }
+  catch(err) {
+    throw Error("Error fetching today cards");
+  }
 }

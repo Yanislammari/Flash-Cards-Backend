@@ -1,4 +1,7 @@
-export function calculateDaysBetween(startDate: Date, endDate: Date = new Date()): number {
+export function calculateDaysBetween(startDate: Date, endDate: Date): number {
+  const start = new Date(startDate.getFullYear(), startDate.getMonth(), startDate.getDate());
+  const end = new Date(endDate.getFullYear(), endDate.getMonth(), endDate.getDate());
   const msInDay = 1000 * 60 * 60 * 24;
-  return Math.floor((endDate.getTime() - startDate.getTime()) / msInDay);
+  const daysDifference = Math.round((end.getTime() - start.getTime()) / msInDay);
+  return daysDifference;
 }
