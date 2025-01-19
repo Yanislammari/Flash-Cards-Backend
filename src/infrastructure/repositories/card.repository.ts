@@ -28,6 +28,20 @@ class CardRepository {
     }
   }
 
+  public static async editCard(cardId: string, updatedData: Partial<CardSchema>): Promise<CardSchema> {
+    try {
+      const card = await CardSchema.findByPk(cardId);
+      if(!card) {
+        throw new Error("Error fetching card by ID");
+      }
+      await card.update(updatedData);
+      return card;
+    }
+    catch (err) {
+      throw new Error("Error editing card");
+    }
+  }
+
   public static async addCard(cardData: Partial<CardSchema>): Promise<CardSchema> {
     try {
       const newCard = await CardSchema.create(cardData.dataValues);
