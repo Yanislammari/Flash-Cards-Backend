@@ -37,7 +37,7 @@ class CardRepository {
       await card.update(updatedData);
       return card;
     }
-    catch (err) {
+    catch(err) {
       throw new Error("Error editing card");
     }
   }

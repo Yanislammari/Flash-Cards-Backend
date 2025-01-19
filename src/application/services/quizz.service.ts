@@ -2,6 +2,7 @@ import Card from "../../domain/entities/card.entity";
 import CardSchema from "../../infrastructure/schemas/card.schema";
 import CardMapper from "../../shared/mappers/card.mapper";
 import CardRepository from "../../infrastructure/repositories/card.repository";
+import Category from "../../shared/value-objects/category";
 import getDaysForCategory from "../../shared/utils/category-days";
 import { calculateDaysBetween } from "../../shared/utils/date";
 
@@ -20,4 +21,20 @@ export async function getCardsForTodayService(todayDate: Date): Promise<Card[]> 
   catch(err) {
     throw Error("Error fetching today cards");
   }
+}
+
+export async function awnserToCardService(cardId: string, isValid: boolean): Promise<Card> {
+  try {
+    const cardSchema = await CardRepository.getCardById(cardId);
+    if(!cardSchema) {
+      throw Error("Error fetching card by ID");
+    }
+
+    isValid ? cardSchema.dataValues.category++ : cardSchema.dataValues.category = Category.FIRST;
+    const newCardSchema = await CardRepository.editCard(cardId, cardSchema);
+    return CardMapper.toDomain(newCardSchema);
+  }
+  catch(err) {
+    throw Error("Error awnser to card");
+  } 
 }
