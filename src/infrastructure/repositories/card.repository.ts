@@ -18,6 +18,16 @@ class CardRepository {
     }
   }
 
+  public static async getCardById(cardId: string): Promise<CardSchema | null> {
+    try {
+      const card = await CardSchema.findByPk(cardId);
+      return card;
+    }
+    catch(err) {
+      throw new Error("Error fetching card by ID");
+    }
+  }
+
   public static async addCard(cardData: Partial<CardSchema>): Promise<CardSchema> {
     try {
       const newCard = await CardSchema.create(cardData.dataValues);
