@@ -13,13 +13,28 @@ function isCardForToday(card: CardSchema, todayDate: Date): boolean {
   return daysSinceUpdate === getDaysForCategory(card.category);
 }
 
+async function isQuizzTodayDone(cards: CardSchema[], todayDate: Date): Promise<boolean> {
+  const lastCard = cards.sort((a, b) => new Date(b.dataValues.updated_at).getTime() - new Date(a.dataValues.updated_at).getTime())[0];
+  const lastUpdatdAt = new Date(lastCard?.dataValues.updated_at);
+  const daysSinceUpdate = calculateDaysBetween(lastUpdatdAt, todayDate);
+  return daysSinceUpdate === 0;
+}
+
 export async function getCardsForTodayService(todayDate: Date): Promise<Card[]> {
   try {
     const cards = await CardRepository.getAllCards();
+
+    if(await isQuizzTodayDone(cards, todayDate)) {
+      throw Error("Error quizz already done");
+    }
+
     const cardsToday = cards.filter((card) => isCardForToday(card, todayDate));
     return CardMapper.toDomainList(cardsToday);
   }
-  catch(err) {
+  catch(err: any) {
+    if(err.message === "Error quizz already done"){
+      throw err;
+    }
     throw Error("Error fetching today cards");
   }
 }

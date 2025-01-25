@@ -12,6 +12,9 @@ export async function getCardsForToday(req: Request, res: Response) {
     if(err.message === "Error fetching today cards") {
       return res.status(400).json({ error: "Error fetching today cards"});
     }
+    else if(err.message === "Error quizz already done") {
+      return res.status(400).json({ error: "Error quizz already done"});
+    }
     return res.status(500).json({ error: "Internal servor error" });
   }
 }
