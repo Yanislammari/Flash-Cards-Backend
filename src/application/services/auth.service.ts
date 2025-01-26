@@ -12,18 +12,21 @@ export async function loginService(email: string, password: string): Promise<str
   try {
     const user = await UserRepository.getByEmail(email);
     if(!user) {
-      throw new Error("Invalid email or password");
+      throw new Error("Invalid email");
     }
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if(!isPasswordValid) {
-      throw new Error("Invalid email or password");
+      throw new Error("Invalid password");
     }
 
     const token = jwt.sign({ id: user.id, email: user.email }, JWT_SECRET, { expiresIn: JWT_EXPIRATION });
     return token;
   }
-  catch(err) {
+  catch(err: any) {
+    if(err.message === "Invalid email" || err.message === "Invalid password") {
+      throw err;
+    }
     throw new Error("Error during login");
   }
 }
