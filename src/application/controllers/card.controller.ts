@@ -36,13 +36,18 @@ export async function getAllCards(req: Request, res: Response) {
 
 export async function addCard(req: Request, res: Response) {
   try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if(!token) {
+      return res.status(401).json({ error: "Token not provided" });
+    }
+
     const { error, value } = cardValidation.validate(req.body);
     if(error) {
       return res.status(400).json({ error: error.details[0].message });
     }
 
     const card: Card = value;
-    const newCard = await addCardService("", card);
+    const newCard = await addCardService(token, card);
     return res.status(201).json(newCard);
   }
   catch(err: any) {
