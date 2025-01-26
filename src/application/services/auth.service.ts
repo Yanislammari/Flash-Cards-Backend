@@ -1,5 +1,6 @@
 import User from "../../domain/entities/user.entity";
 import UserRepository from "../../infrastructure/repositories/user.repository";
+import Payload from "../../shared/utils/payload";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
@@ -56,5 +57,24 @@ export async function registerService(user: User): Promise<string> {
       throw err;
     }
     throw new Error("Error during registration");
+  }
+}
+
+export async function decodeToken(token: string): Promise<User> {
+  try {
+    const decoded = jwt.verify(token, JWT_SECRET) as Payload;
+    const user = await UserRepository.getUserById(decoded.id);
+
+    if(!user) {
+      throw new Error("User not found");
+    }
+
+    return user;
+  }
+  catch(err: any) {
+    if(err.message === "User not found") {
+      throw err;
+    }
+    throw new Error("Invalid or expired token");
   }
 }
