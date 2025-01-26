@@ -1,5 +1,6 @@
 import { sequelize } from "../../infrastructure/database";
 import CardSchema from "../../infrastructure/schemas/card.schema";
+import Category from "../../shared/value-objects/category";
 
 describe('add card test', () => {
 
@@ -16,6 +17,7 @@ describe('add card test', () => {
   it('should send an error concerning question', async () => {
 
     const newCard = {
+      "category":Category.FIRST,
       "question": "",
       "answer": "aa",
       "tag": "tag"
@@ -26,16 +28,17 @@ describe('add card test', () => {
     );
   });
 
-  it('should send an error concerning question', async () => {
+  it('should send an error concerning answer emptyness', async () => {
 
     const newCard = {
-      "question": "",
-      "answer": "aa",
+      "category":Category.FIRST,
+      "question": "What should I do?",
+      "answer": "",
       "tag": "tag"
     };
 
     expect(CardSchema.create(newCard, transaction)).rejects.toThrow(
-      "Validation error: Question cannot be empty"
+      "Validation error: Answer cannot be empty"
     );
   });
 
