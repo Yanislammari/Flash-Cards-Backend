@@ -60,7 +60,7 @@ export async function registerService(user: User): Promise<string> {
   }
 }
 
-export async function decodeToken(token: string): Promise<User> {
+export async function decodeTokenService(token: string): Promise<User> {
   try {
     const decoded = jwt.verify(token, JWT_SECRET) as Payload;
     const user = await UserRepository.getUserById(decoded.id);

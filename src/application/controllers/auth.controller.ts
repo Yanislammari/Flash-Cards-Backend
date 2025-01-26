@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { loginService, registerService } from "../services/auth.service";
+import { loginService, registerService, decodeTokenService } from "../services/auth.service";
 import User from "../../domain/entities/user.entity";
 import UserValidation from "../../domain/validations/user.validation";
 
@@ -40,6 +40,27 @@ export async function register(req: Request, res: Response) {
     }
     else if(err.message === "Error during registration") {
       return res.status(500).json({ error: "Error during registration" });
+    }
+    return res.status(500).json({ error: "Internal servor error" });
+  }
+}
+
+export async function decodeToken(req: Request, res: Response) {
+  try {
+    const token = req.headers.authorization?.split(' ')[1];
+    if(!token) {
+      return res.status(401).json({ error: "Token not provided" });
+    }
+
+    const user = await decodeTokenService(token);
+    return res.status(200).json(user);
+  }
+  catch(err: any) {
+    if(err.message === "User not found") {
+      return res.status(404).json({ error: "User not found" });
+    }
+    else if(err.message === "Invalid or expired token") {
+      return res.status(400).json({ error: "Invalid or expired token" });
     }
     return res.status(500).json({ error: "Internal servor error" });
   }
