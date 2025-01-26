@@ -2,6 +2,8 @@ import Card from "../../domain/entities/card.entity";
 import CardRepository from "../../infrastructure/repositories/card.repository";
 import CardSchema from "../../infrastructure/schemas/card.schema";
 import CardMapper from "../../shared/mappers/card.mapper";
+import CardUserDataRepository from "../../infrastructure/repositories/card-user-data.repository";
+import { decodeTokenService } from "./auth.service";
 
 export async function getAllCardsService(tags?: string[]): Promise<Card[]> {
   try {
@@ -14,10 +16,12 @@ export async function getAllCardsService(tags?: string[]): Promise<Card[]> {
   }
 }
 
-export async function addCardService(card: Card): Promise<Card> {
+export async function addCardService(token: string, card: Card): Promise<Card> {
   try {
+    const user = await decodeTokenService(token);
     const cardSchema: CardSchema = await CardMapper.toSchema(card);
     const newCardSchema: CardSchema = await CardRepository.addCard(cardSchema);
+    await CardUserDataRepository.addCardUserAssociation(newCardSchema.id, user.id);
     const newCard: Card = CardMapper.toDomain(newCardSchema);
     return newCard;
   }

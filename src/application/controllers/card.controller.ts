@@ -42,7 +42,7 @@ export async function addCard(req: Request, res: Response) {
     }
 
     const card: Card = value;
-    const newCard = await addCardService(card);
+    const newCard = await addCardService("", card);
     return res.status(201).json(newCard);
   }
   catch(err: any) {
