@@ -8,6 +8,8 @@ class CardSchema extends Model {
   public question!: string;
   public answer!: string;
   public tag!: string;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 CardSchema.init({
@@ -42,6 +44,10 @@ CardSchema.init({
       notNull: {
         msg: "Question cannot be null",
       },
+      len: {
+        args: [0, 255],  // Maximum length check
+        msg: "Question cannot be longer than 255 characters",
+      }
     },
   },
   answer: {
@@ -54,6 +60,10 @@ CardSchema.init({
       notNull: {
         msg: "Answer cannot be null",
       },
+      len: {
+        args: [0, 255], 
+        msg: "Answer cannot be longer than 255 characters",
+      }
     },
   },
   tag: {
@@ -66,6 +76,10 @@ CardSchema.init({
       notNull: {
         msg: "Tag cannot be null",
       },
+      len: {
+        args: [0, 255], 
+        msg: "Tag cannot be longer than 255 characters",
+      }
     },
   }
 },{

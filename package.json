@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "jest --forceExit --detectOpenHandles",
+    "test": "jest --detectOpenHandles",
     "start": "nodemon --watch ."
   },
   "keywords": [],
