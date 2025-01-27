@@ -37,7 +37,7 @@ describe('add card test', () => {
   ];
 
   test.each(testCases)(
-    "should send an error when $field is $value",
+    "should send an error when trying to add a card when $field has $value",
     async ({ field, value, errorMessage}) => {
 
       (newCard as any)[field] = value;
@@ -77,7 +77,7 @@ describe('add card test', () => {
       expect(card.tag).toBe("tag");
       expect(card.createdAt).not.toBeNull();
       expect(card.updatedAt).not.toBeNull();
-      
+
     } catch (error) {
       
       await transaction.rollback();
