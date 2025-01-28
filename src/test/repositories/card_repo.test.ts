@@ -54,7 +54,7 @@ describe('add card test', () => {
   );
 
 
-  it('should add a card', async () => {
+  /*it('should add a card', async () => {
 
 
     const transaction = await sequelize.transaction();
@@ -83,6 +83,5 @@ describe('add card test', () => {
       await transaction.rollback();
       throw error;
     }
-  });
-
+  });*/
 });

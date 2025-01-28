@@ -13,7 +13,7 @@ export function isCardForToday(card: CardSchema, todayDate: Date): boolean {
   return daysSinceUpdate === getDaysForCategory(card.category);
 }
 
-async function isQuizzTodayDone(cards: CardSchema[], todayDate: Date): Promise<boolean> {
+export function isQuizzTodayDone(cards: CardSchema[], todayDate: Date): boolean {
   const lastCard = cards.sort((a, b) => new Date(b.dataValues.updated_at).getTime() - new Date(a.dataValues.updated_at).getTime())[0];
   const lastUpdatdAt = new Date(lastCard?.dataValues.updated_at);
   const daysSinceUpdate = calculateDaysBetween(lastUpdatdAt, todayDate);
