@@ -12,6 +12,7 @@ describe('Nombre de jours de différence entre deux dates', () => {
         {startDate : new Date('2021-01-01'), endDate : new Date('2022-01-01'), expected : 365},
         {startDate : new Date('2021-01-01'), endDate : new Date('2022-01-02'), expected : 366},
         {startDate : new Date('2021-01-01'), endDate : new Date('2022-02-03'), expected : 398},
+        {startDate : new Date('2021-01-03'), endDate : new Date('2021-01-01'), expected : -2},
     ];
 
 
