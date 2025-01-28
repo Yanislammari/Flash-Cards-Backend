@@ -6,6 +6,8 @@ class UserSchema extends Model {
   public username!: string;
   public email!: string;
   public password!: string;
+  public readonly createdAt!: Date;
+  public readonly updatedAt!: Date;
 }
 
 UserSchema.init({
@@ -44,6 +46,10 @@ UserSchema.init({
       notNull: {
         msg: "Email cannot be null",
       },
+      len: {
+        args: [0, 255],
+        msg: "Email must be between 0 and 255 characters",
+      }
     },
   },
   password: {
