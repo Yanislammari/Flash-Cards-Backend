@@ -9,7 +9,7 @@ class CardSchema extends Model {
   public answer!: string;
   public tag!: string;
   public readonly createdAt!: Date;
-  public readonly updatedAt!: Date;
+  public readonly updatedAt!: string;
 }
 
 CardSchema.init({

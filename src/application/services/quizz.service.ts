@@ -7,7 +7,7 @@ import getDaysForCategory from "../../shared/utils/category-days";
 import { calculateDaysBetween } from "../../shared/utils/date";
 import { incrementCategory } from "../../shared/value-objects/category";
 
-function isCardForToday(card: CardSchema, todayDate: Date): boolean {
+export function isCardForToday(card: CardSchema, todayDate: Date): boolean {
   const updatedAt = new Date(card.dataValues.updated_at);
   const daysSinceUpdate = calculateDaysBetween(updatedAt, todayDate);
   return daysSinceUpdate === getDaysForCategory(card.category);
