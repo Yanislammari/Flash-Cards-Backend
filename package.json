@@ -5,6 +5,7 @@
   "main": "index.ts",
   "scripts": {
     "test": "jest ./src/tests/unit_tests",
+    "e2e": "jest ./src/tests/add_card_e2e.test.ts",
     "start": "nodemon --watch ."
   },
   "keywords": [],
