@@ -1,4 +1,5 @@
 I have made the end-to-end test using postman and a specific db.
+The db name is test_flash_cards
 
 First run the command : npm run test_env
 
