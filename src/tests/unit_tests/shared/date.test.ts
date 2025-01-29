@@ -1,6 +1,6 @@
 //test date difference
 
-import { calculateDaysBetween } from "../../shared/utils/date";
+import { calculateDaysBetween } from "../../../shared/utils/date";
 
 describe('Nombre de jours de différence entre deux dates', () => {
 

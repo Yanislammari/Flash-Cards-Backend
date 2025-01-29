@@ -1,4 +1,4 @@
-import UserValidation from "../../domain/validations/user.validation";
+import UserValidation from "../../../domain/validations/user.validation";
 
 describe('validate user',()=>{
 

@@ -1,6 +1,6 @@
-import User from "../../domain/entities/user.entity";
-import UserSchema from "../../infrastructure/schemas/user.schema";
-import UserMapper from "../../shared/mappers/user.mapper";
+import User from "../../../domain/entities/user.entity";
+import UserSchema from "../../../infrastructure/schemas/user.schema";
+import UserMapper from "../../../shared/mappers/user.mapper";
 
 describe('user mapper',()=>{
 

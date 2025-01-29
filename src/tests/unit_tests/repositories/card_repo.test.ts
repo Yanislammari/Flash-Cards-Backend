@@ -1,7 +1,6 @@
-import {sequelize} from "../../infrastructure/database";
-import CardRepository from "../../infrastructure/repositories/card.repository";
-import CardSchema from "../../infrastructure/schemas/card.schema";
-import Category from "../../shared/value-objects/category";
+import CardRepository from "../../../infrastructure/repositories/card.repository";
+import CardSchema from "../../../infrastructure/schemas/card.schema";
+import Category from "../../../shared/value-objects/category";
 
 describe('add card test', () => {
 

@@ -1,6 +1,6 @@
-import { isCardForToday, isQuizzTodayDone } from "../../application/services/quizz.service";
-import CardSchema from "../../infrastructure/schemas/card.schema";
-import Category from "../../shared/value-objects/category";
+import { isCardForToday, isQuizzTodayDone } from "../../../application/services/quizz.service";
+import CardSchema from "../../../infrastructure/schemas/card.schema";
+import Category from "../../../shared/value-objects/category";
 
 describe('test is card for today',()=>{
 
