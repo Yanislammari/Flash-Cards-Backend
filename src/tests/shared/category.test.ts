@@ -1,6 +1,6 @@
 // test of category increment
 
-import Category, { incrementCategory } from "../../../shared/value-objects/category";
+import Category, { incrementCategory } from "../../shared/value-objects/category";
 
 describe('Increment category', () => {
 

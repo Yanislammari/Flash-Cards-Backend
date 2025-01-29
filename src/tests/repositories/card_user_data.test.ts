@@ -1,5 +1,5 @@
-import CardUserDataRepository from "../../../infrastructure/repositories/card-user-data.repository";
-import CardUserDataSchema from "../../../infrastructure/schemas/card-user-data.schema";
+import CardUserDataRepository from "../../infrastructure/repositories/card-user-data.repository";
+import CardUserDataSchema from "../../infrastructure/schemas/card-user-data.schema";
 
 describe('card user data repository', () => {
 

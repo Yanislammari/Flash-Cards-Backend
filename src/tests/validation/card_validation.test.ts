@@ -1,5 +1,5 @@
-import cardValidation from "../../../domain/validations/card.validation";
-import Category from "../../../shared/value-objects/category";
+import cardValidation from "../../domain/validations/card.validation";
+import Category from "../../shared/value-objects/category";
 
 
 describe('cardValidation tests', () => {

@@ -1,7 +1,7 @@
-import Card from "../../../domain/entities/card.entity";
-import CardSchema from "../../../infrastructure/schemas/card.schema";
-import CardMapper from "../../../shared/mappers/card.mapper";
-import Category from "../../../shared/value-objects/category";
+import Card from "../../domain/entities/card.entity";
+import CardSchema from "../../infrastructure/schemas/card.schema";
+import CardMapper from "../../shared/mappers/card.mapper";
+import Category from "../../shared/value-objects/category";
 
 describe('card mapper',()=>{
 

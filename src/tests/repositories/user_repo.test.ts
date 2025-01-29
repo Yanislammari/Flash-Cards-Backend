@@ -1,5 +1,5 @@
-import UserRepository from "../../../infrastructure/repositories/user.repository";
-import UserSchema from "../../../infrastructure/schemas/user.schema";
+import UserRepository from "../../infrastructure/repositories/user.repository";
+import UserSchema from "../../infrastructure/schemas/user.schema";
 
 describe('user repo test', () => {
   

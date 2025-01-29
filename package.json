@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "jest ./src/tests/unit_tests",
-    "e2e": "jest ./src/tests/add_card_e2e.test.ts",
-    "start": "nodemon --watch ."
+    "test": "jest",
+    "start": "nodemon --watch .",
+    "test_env": "cross-env DATABASE_NAME=test_flash_cards SERVER_PORT=2266 nodemon --watch ."
   },
   "keywords": [],
   "author": "",
@@ -25,6 +25,7 @@
     "@types/supertest": "^6.0.2",
     "@types/typescript": "^2.0.0",
     "bcrypt": "^5.1.1",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
     "joi": "^17.13.3",
