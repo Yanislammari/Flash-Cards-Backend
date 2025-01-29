@@ -7,13 +7,13 @@ import getDaysForCategory from "../../shared/utils/category-days";
 import { calculateDaysBetween } from "../../shared/utils/date";
 import { incrementCategory } from "../../shared/value-objects/category";
 
-function isCardForToday(card: CardSchema, todayDate: Date): boolean {
+export function isCardForToday(card: CardSchema, todayDate: Date): boolean {
   const updatedAt = new Date(card.dataValues.updated_at);
   const daysSinceUpdate = calculateDaysBetween(updatedAt, todayDate);
   return daysSinceUpdate === getDaysForCategory(card.category);
 }
 
-async function isQuizzTodayDone(cards: CardSchema[], todayDate: Date): Promise<boolean> {
+export function isQuizzTodayDone(cards: CardSchema[], todayDate: Date): boolean {
   const lastCard = cards.sort((a, b) => new Date(b.dataValues.updated_at).getTime() - new Date(a.dataValues.updated_at).getTime())[0];
   const lastUpdatdAt = new Date(lastCard?.dataValues.updated_at);
   const daysSinceUpdate = calculateDaysBetween(lastUpdatdAt, todayDate);
@@ -24,7 +24,7 @@ export async function getCardsForTodayService(todayDate: Date): Promise<Card[]> 
   try {
     const cards = await CardRepository.getAllCards();
 
-    if(await isQuizzTodayDone(cards, todayDate)) {
+    if(isQuizzTodayDone(cards, todayDate)) {
       throw Error("Error quizz already done");
     }
 

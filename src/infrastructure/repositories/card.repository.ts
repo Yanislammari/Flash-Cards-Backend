@@ -33,7 +33,7 @@ class CardRepository {
       const newCard = await CardSchema.create(cardData.dataValues);
       return newCard;
     }
-    catch(err) {
+    catch(err : any) {
       throw new Error("Error adding card");
     }
   }

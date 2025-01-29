@@ -1,0 +1,159 @@
+{
+	"info": {
+		"_postman_id": "9094fb23-79f1-47d3-b04e-fb335bbf75a5",
+		"name": "e2e",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "27094153"
+	},
+	"item": [
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"user\",\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"1Test!tropCourt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:2266/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Response contains a token\", function () {\r",
+							"    pm.expect(pm.response.json()).to.have.property('token').that.is.a('string').and.not.empty;\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"authToken\", pm.response.json().token);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": ""
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\": \"test@test.com\",\r\n    \"password\": \"1Test!tropCourt\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:2266/auth/login",
+				"description": "This endpoint allows users to authenticate and obtain a token for accessing protected resources. The HTTP POST request should be made to [http://localhost:2266/auth/login](http://localhost:2266/auth/login) with the following payload in raw format:\n\n``` json\n{\n  \"email\": \"string\",\n  \"password\": \"string\"\n}\n\n ```\n\nUpon successful execution, the response will have a status code of 200 and a content type of application/json. The response body will contain a token that needs to be stored for use in the next request.\n\nStore the token from the response for use in the next request."
+			},
+			"response": []
+		},
+		{
+			"name": "post_card",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Verify the response body structure\", function () {\r",
+							"    const jsonData = pm.response.json();\r",
+							"    \r",
+							"    pm.expect(jsonData).to.have.property(\"id\");\r",
+							"    pm.expect(jsonData).to.have.property(\"category\");\r",
+							"    pm.expect(jsonData).to.have.property(\"question\");\r",
+							"    pm.expect(jsonData).to.have.property(\"answer\");\r",
+							"    pm.expect(jsonData).to.have.property(\"tag\");\r",
+							"});\r",
+							"\r",
+							"pm.environment.set(\"id_to_find\", pm.response.json().id);\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				},
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"var token = pm.environment.get(\"authToken\");\r",
+							"\r",
+							"pm.request.headers.add({\r",
+							"    key: \"Authorization\",\r",
+							"    value: \"Bearer \" + token\r",
+							"});"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": ""
+					}
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"question\": \"test_e2e\",\r\n    \"answer\": \"here_id\",\r\n    \"tag\": \"tag\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:2266/cards"
+			},
+			"response": []
+		},
+		{
+			"name": "get_cards",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"pm.test(\"Check if id_to_find exists in the response\", function () {\r",
+							"    var responseBody = pm.response.json();\r",
+							"    var idToFind = pm.environment.get(\"id_to_find\");\r",
+							"    \r",
+							"    pm.expect(responseBody.some(item => item.id === idToFind)).to.be.true;\r",
+							"});\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:2266/cards"
+			},
+			"response": []
+		}
+	]
+}
