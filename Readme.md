@@ -1,5 +1,6 @@
 I have made the end-to-end test using postman and a specific db.
 The db name is test_flash_cards
+You will have to create it on whatever service you are using as a db.
 
 First run the command : npm run test_env
 
@@ -8,7 +9,7 @@ to launch the test environment
 Then, import the e2e.postman_collection.json in Postman
 
 To do so go into Postman collection and click on Import, then select the file.
-Then click on it.
+Then click on this collection.
 
 In the top bar on the left, you should see a 'Run' button with an icon, click on it.
 Normally the order is good but verify it, you should have :
