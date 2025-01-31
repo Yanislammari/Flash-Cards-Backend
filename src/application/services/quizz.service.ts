@@ -23,8 +23,7 @@ export function isQuizzTodayDone(cards: CardSchema[], todayDate: Date): boolean 
 export async function getCardsForTodayService(todayDate: Date): Promise<Card[]> {
   try {
     const cards = await CardRepository.getAllCards();
-
-    if(isQuizzTodayDone(cards, todayDate)) {
+    
     if(isQuizzTodayDone(cards, todayDate)) {
       throw Error("Error quizz already done");
     }
