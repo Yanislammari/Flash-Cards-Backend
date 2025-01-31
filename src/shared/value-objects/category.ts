@@ -7,7 +7,6 @@ enum Category {
   SIXTH = "SIXTH",
   SEVENTH = "SEVENTH",
   DONE = "DONE",
-  incrementCategory = "incrementCategory"
 }
 
 export const incrementCategory = (category: Category): Category => {

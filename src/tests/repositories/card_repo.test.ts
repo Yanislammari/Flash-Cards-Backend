@@ -68,6 +68,7 @@ describe('add card test', () => {
     
       const card = await CardSchema.create(cardToAdd, { transaction });
       await transaction.rollback();
+      
 
       expect(card).not.toBeNull();
       expect(card.category).toBe(Category.FIRST);
