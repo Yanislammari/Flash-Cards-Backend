@@ -53,7 +53,6 @@ export async function awnserToCardService(cardId: string, isValid: boolean): Pro
     isValid === true ? cardSchema.category = incrementCategory(cardSchema.category) : cardSchema.category = Category.FIRST;
 
     if(cardSchema.category === Category.FIRST) {
-      console.log("ok");
       await CardRepository.syncUpdatedAt(cardId);
     }
 

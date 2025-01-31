@@ -60,8 +60,9 @@ class CardRepository {
         throw new Error("Error fetching card by ID");
       }
       
-      await card.update({ updated_at: new Date() }, { silent: false });
-      await card.save();
+      const storeTag = card.tag;
+      await card.update({ tag: "/" }, { silent: false }); // Solution car il parrait impossible de modifier le updated_at pour l'instant
+      await card.update({ tag: storeTag }, { silent: false });
     }
     catch(err) {
       throw new Error("Error editing card");
