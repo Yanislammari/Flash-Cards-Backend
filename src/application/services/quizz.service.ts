@@ -25,6 +25,7 @@ export async function getCardsForTodayService(todayDate: Date): Promise<Card[]> 
     const cards = await CardRepository.getAllCards();
 
     if(isQuizzTodayDone(cards, todayDate)) {
+    if(isQuizzTodayDone(cards, todayDate)) {
       throw Error("Error quizz already done");
     }
 
@@ -50,7 +51,12 @@ export async function awnserToCardService(cardId: string, isValid: boolean): Pro
       throw new Error("Card is already done");
     }
 
-    isValid ? cardSchema.category = incrementCategory(cardSchema.category) : cardSchema.category = Category.FIRST;
+    isValid === true ? cardSchema.category = incrementCategory(cardSchema.category) : cardSchema.category = Category.FIRST;
+
+    if(cardSchema.category === Category.FIRST) {
+      await CardRepository.syncUpdatedAt(cardId);
+    }
+
     await CardRepository.editCard(cardId, { category: cardSchema.category });
   }
   catch(err: any) {

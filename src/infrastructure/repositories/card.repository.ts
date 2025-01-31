@@ -44,8 +44,25 @@ class CardRepository {
       if(!card) {
         throw new Error("Error fetching card by ID");
       }
+
       await card.update(updatedData);
       return card;
+    }
+    catch(err) {
+      throw new Error("Error editing card");
+    }
+  }
+
+  public static async syncUpdatedAt(cardId: string): Promise<void> {
+    try {
+      const card = await CardSchema.findByPk(cardId);
+      if(!card) {
+        throw new Error("Error fetching card by ID");
+      }
+      
+      const storeTag = card.tag;
+      await card.update({ tag: "/" }, { silent: false }); // Solution car il parrait impossible de modifier le updated_at pour l'instant
+      await card.update({ tag: storeTag }, { silent: false });
     }
     catch(err) {
       throw new Error("Error editing card");
