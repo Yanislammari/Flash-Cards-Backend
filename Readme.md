@@ -11,7 +11,7 @@ Then, import the e2e.postman_collection.json in Postman
 To do so go into Postman collection and click on Import, then select the file.
 Then click on this collection.
 
-In the top bar on the left, you should see a 'Run' button with an icon, click on it.
+In the top bar on the right, you should see a 'Run' button with an icon, click on it.
 Normally the order is good but verify it, you should have :
 
 POST Register
