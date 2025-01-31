@@ -44,8 +44,24 @@ class CardRepository {
       if(!card) {
         throw new Error("Error fetching card by ID");
       }
+
       await card.update(updatedData);
       return card;
+    }
+    catch(err) {
+      throw new Error("Error editing card");
+    }
+  }
+
+  public static async syncUpdatedAt(cardId: string): Promise<void> {
+    try {
+      const card = await CardSchema.findByPk(cardId);
+      if(!card) {
+        throw new Error("Error fetching card by ID");
+      }
+      
+      await card.update({ updated_at: new Date() }, { silent: false });
+      await card.save();
     }
     catch(err) {
       throw new Error("Error editing card");

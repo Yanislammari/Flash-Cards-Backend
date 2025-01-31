@@ -13,7 +13,7 @@ function isCardForToday(card: CardSchema, todayDate: Date): boolean {
   return daysSinceUpdate === getDaysForCategory(card.category);
 }
 
-async function isQuizzTodayDone(cards: CardSchema[], todayDate: Date): Promise<boolean> {
+function isQuizzTodayDone(cards: CardSchema[], todayDate: Date): boolean {
   const lastCard = cards.sort((a, b) => new Date(b.dataValues.updated_at).getTime() - new Date(a.dataValues.updated_at).getTime())[0];
   const lastUpdatdAt = new Date(lastCard?.dataValues.updated_at);
   const daysSinceUpdate = calculateDaysBetween(lastUpdatdAt, todayDate);
@@ -24,7 +24,7 @@ export async function getCardsForTodayService(todayDate: Date): Promise<Card[]> 
   try {
     const cards = await CardRepository.getAllCards();
 
-    if(await isQuizzTodayDone(cards, todayDate)) {
+    if(isQuizzTodayDone(cards, todayDate)) {
       throw Error("Error quizz already done");
     }
 
@@ -50,7 +50,13 @@ export async function awnserToCardService(cardId: string, isValid: boolean): Pro
       throw new Error("Card is already done");
     }
 
-    isValid ? cardSchema.category = incrementCategory(cardSchema.category) : cardSchema.category = Category.FIRST;
+    isValid === true ? cardSchema.category = incrementCategory(cardSchema.category) : cardSchema.category = Category.FIRST;
+
+    if(cardSchema.category === Category.FIRST) {
+      console.log("ok");
+      await CardRepository.syncUpdatedAt(cardId);
+    }
+
     await CardRepository.editCard(cardId, { category: cardSchema.category });
   }
   catch(err: any) {
