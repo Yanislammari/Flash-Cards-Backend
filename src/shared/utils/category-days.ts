@@ -1,7 +1,7 @@
-import Category from "../value-objects/category";
+import Category from "../../domain/value-objects/category";
 
 const getDaysForCategory = (category: Category): number | undefined => {
-  switch(category) {
+  switch (category) {
     case Category.FIRST: {
       return 1;
     }
