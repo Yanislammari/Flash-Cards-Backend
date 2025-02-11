@@ -1,10 +1,10 @@
 import CardRepository from "../../infrastructure/repositories/card.repository";
 import CardSchema from "../../infrastructure/schemas/card.schema";
-import Category from "../../shared/value-objects/category";
+import Category from "../../domain/value-objects/category";
 
 describe('add card test', () => {
 
-  let newCard : Partial<CardSchema>;
+  let newCard: Partial<CardSchema>;
 
   beforeEach(() => {
     newCard = new CardSchema;
@@ -37,7 +37,7 @@ describe('add card test', () => {
 
   test.each(testCases)(
     "should send an error when trying to add a card when $field has $value",
-    async ({ field, value, errorMessage}) => {
+    async ({ field, value, errorMessage }) => {
 
       (newCard as any)[field] = value;
 
