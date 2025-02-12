@@ -1,14 +1,25 @@
 import CardUserDataSchema from "../schemas/card-user-data.schema";
 
 class CardUserDataRepository {
-  public static async addCardUserAssociation(cardId: string, userId: string): Promise<void> {
+  private static instance: CardUserDataRepository;
+
+  private constructor() { }
+
+  public static getInstance(): CardUserDataRepository {
+    if (!CardUserDataRepository.instance) {
+      CardUserDataRepository.instance = new CardUserDataRepository();
+    }
+    return CardUserDataRepository.instance;
+  }
+
+  public async addCardUserAssociation(cardId: string, userId: string): Promise<void> {
     try {
       await CardUserDataSchema.create({ cardId, userId });
     }
-    catch(err) {
+    catch (err) {
       throw new Error("Error creating card-user association");
     }
   }
 }
 
-export default CardUserDataRepository;
+export default CardUserDataRepository.getInstance();
