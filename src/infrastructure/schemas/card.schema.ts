@@ -1,6 +1,6 @@
 import { DataTypes, Model } from "sequelize";
 import { sequelize } from "../database";
-import Category from "../../shared/value-objects/category";
+import Category from "../../domain/value-objects/category";
 
 class CardSchema extends Model {
   public id!: string;
@@ -61,7 +61,7 @@ CardSchema.init({
         msg: "Answer cannot be null",
       },
       len: {
-        args: [0, 255], 
+        args: [0, 255],
         msg: "Answer cannot be longer than 255 characters",
       }
     },
@@ -77,12 +77,12 @@ CardSchema.init({
         msg: "Tag cannot be null",
       },
       len: {
-        args: [0, 255], 
+        args: [0, 255],
         msg: "Tag cannot be longer than 255 characters",
       }
     },
   }
-},{
+}, {
   sequelize,
   tableName: "cards",
   modelName: "CardSchema",

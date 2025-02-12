@@ -1,13 +1,13 @@
 import Card from "../../domain/entities/card.entity";
 import CardSchema from "../../infrastructure/schemas/card.schema";
 import CardMapper from "../../shared/mappers/card.mapper";
-import Category from "../../shared/value-objects/category";
+import Category from "../../domain/value-objects/category";
 
-describe('card mapper',()=>{
+describe('card mapper', () => {
 
-  it('should map card schema to card domain',()=>{
+  it('should map card schema to card domain', () => {
 
-    let card : CardSchema = new CardSchema;
+    let card: CardSchema = new CardSchema;
     card.id = 'randomID';
     card.category = Category.FIRST;
     card.question = 'question';
@@ -24,10 +24,10 @@ describe('card mapper',()=>{
 
   });
 
-  it('should map card schema list to card domain list',()=>{
-    let cards : CardSchema[] = [];
+  it('should map card schema list to card domain list', () => {
+    let cards: CardSchema[] = [];
 
-    let card : CardSchema = new CardSchema;
+    let card: CardSchema = new CardSchema;
     card.id = 'randomID';
     card.category = Category.FIRST;
     card.question = 'question';
@@ -48,10 +48,10 @@ describe('card mapper',()=>{
     expect(cardDomainList[2].id).toBe(cards[2].id);
 
   });
-  
-  it('should map card domain to card schema',async ()=>{
 
-    let card : Card = {
+  it('should map card domain to card schema', async () => {
+
+    let card: Card = {
       id: 'randomID',
       category: Category.FIRST,
       question: 'question',
@@ -69,11 +69,11 @@ describe('card mapper',()=>{
 
   });
 
-  it('should map card domain list to card schema list',async ()=>{
+  it('should map card domain list to card schema list', async () => {
 
-    let cards : Card[] = [];
+    let cards: Card[] = [];
 
-    let card : Card = {
+    let card: Card = {
       id: 'randomID',
       category: Category.FIRST,
       question: 'question',

@@ -1,5 +1,5 @@
 import cardValidation from "../../domain/validations/card.validation";
-import Category from "../../shared/value-objects/category";
+import Category from "../../domain/value-objects/category";
 
 
 describe('cardValidation tests', () => {
@@ -25,9 +25,9 @@ describe('cardValidation tests', () => {
   it('should set the default category if not provided', () => {
 
     const card = {
-        question: "What is 2 + 2?",
-        answer: "4",
-        tag: "math"
+      question: "What is 2 + 2?",
+      answer: "4",
+      tag: "math"
     };
 
     const { error, value } = cardValidation.validate(card);
@@ -54,9 +54,9 @@ describe('cardValidation tests', () => {
 
   it('should return an error if question is missing', () => {
     const card = {
-        Category: Category.FIRST,
-        answer: "4",
-        tag: "math"
+      Category: Category.FIRST,
+      answer: "4",
+      tag: "math"
     };
 
     const { error } = cardValidation.validate(card);
@@ -110,7 +110,7 @@ describe('cardValidation tests', () => {
     const card = {
       category: Category.FIRST,
       question: "What is 2 + 2?",
-        answer: "4",
+      answer: "4",
     };
 
     const { error } = cardValidation.validate(card);

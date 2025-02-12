@@ -1,5 +1,5 @@
 import joi from "joi";
-import Category from "../../shared/value-objects/category";
+import Category from "../../domain/value-objects/category";
 
 const cardValidation = joi.object({
   category: joi.string().valid(...Object.values(Category)).default(Category.FIRST).optional(),
