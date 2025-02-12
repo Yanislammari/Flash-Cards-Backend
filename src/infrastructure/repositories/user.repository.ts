@@ -1,47 +1,48 @@
 import UserSchema from "../schemas/user.schema";
 
 class UserRepository {
-  public static async getAllUsers(): Promise<UserSchema[]> {
-    try {
-      const users: UserSchema[] = await UserSchema.findAll();
-      return users;
+  private static instance: UserRepository;
+
+  private constructor() { }
+
+  public static getInstance(): UserRepository {
+    if (!UserRepository.instance) {
+      UserRepository.instance = new UserRepository();
     }
-    catch(err) {
+    return UserRepository.instance;
+  }
+
+  public async getAllUsers(): Promise<UserSchema[]> {
+    try {
+      return await UserSchema.findAll();
+    } catch (err) {
       throw new Error("Error fetching users");
     }
   }
 
-  public static async getUserById(id: string): Promise<UserSchema | null> {
+  public async getUserById(id: string): Promise<UserSchema | null> {
     try {
-      const user: UserSchema | null = await UserSchema.findByPk(id);
-      return user;
-    }
-    catch(err) {
+      return await UserSchema.findByPk(id);
+    } catch (err) {
       throw new Error("Error fetching user by ID");
     }
   }
 
-  public static async getByEmail(email: string): Promise<UserSchema | null> {
+  public async getByEmail(email: string): Promise<UserSchema | null> {
     try {
-      const user: UserSchema | null = await UserSchema.findOne({
-        where: { email },
-      });
-      return user;
-    }
-    catch(err) {
+      return await UserSchema.findOne({ where: { email } });
+    } catch (err) {
       throw new Error("Error fetching user by email");
     }
   }
 
-  public static async addUser(userData: Partial<UserSchema>): Promise<UserSchema> {
+  public async addUser(userData: Partial<UserSchema>): Promise<UserSchema> {
     try {
-      const newUser: UserSchema = await UserSchema.create(userData);
-      return newUser;
-    }
-    catch(err) {
+      return await UserSchema.create(userData);
+    } catch (err) {
       throw new Error("Error adding user");
     }
   }
 }
 
-export default UserRepository;
+export default UserRepository.getInstance();

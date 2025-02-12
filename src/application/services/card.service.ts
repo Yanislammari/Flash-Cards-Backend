@@ -5,13 +5,14 @@ import CardMapper from "../../shared/mappers/card.mapper";
 import CardUserDataRepository from "../../infrastructure/repositories/card-user-data.repository";
 import { decodeTokenService } from "./auth.service";
 
+
 export async function getAllCardsService(tags?: string[]): Promise<Card[]> {
   try {
     const cardsSchema = await CardRepository.getAllCards(tags);
     const cards: Card[] = CardMapper.toDomainList(cardsSchema);
     return cards;
   }
-  catch(err) {
+  catch (err) {
     throw Error("Error fetching cards");
   }
 }
@@ -25,7 +26,7 @@ export async function addCardService(token: string, card: Card): Promise<Card> {
     const newCard: Card = CardMapper.toDomain(newCardSchema);
     return newCard;
   }
-  catch(err) {
+  catch (err) {
     throw Error("Error adding card");
   }
 }
