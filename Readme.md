@@ -9,6 +9,8 @@ To run test :
 
 Run npm run test
 
+La couverture de test est de 68% selon JEST
+
 End to end test:
 
 I have made the end-to-end test using postman and a specific db.

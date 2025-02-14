@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.ts",
   "scripts": {
-    "test": "jest",
+    "test": "jest --coverage",
     "start": "nodemon --watch .",
     "test_env": "cross-env DATABASE_NAME=test_flash_cards SERVER_PORT=2266 nodemon --watch ."
   },
