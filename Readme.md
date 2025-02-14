@@ -1,3 +1,13 @@
+To start the API :
+
+Modify .env to make it match your config ( specifically the DATABASE_PORT )
+Then create a DB accessible on this port with the name flash_cards_db ( or modify the .env to make it match )
+Run npm install
+Run npm run start
+
+
+End to end test:
+
 I have made the end-to-end test using postman and a specific db.
 The db name is test_flash_cards
 You will have to create it on whatever service you are using as a db.
