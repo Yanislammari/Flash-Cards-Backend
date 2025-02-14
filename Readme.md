@@ -5,6 +5,9 @@ Then create a DB accessible on this port with the name flash_cards_db ( or modif
 Run npm install
 Run npm run start
 
+To run test :
+
+Run npm run test
 
 End to end test:
 
